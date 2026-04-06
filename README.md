@@ -1,6 +1,6 @@
 # A Service SRLS — Sito Web Professionale
 
-Sito web moderno per A Service SRLS, azienda di pulizie e manutenzioni a Milano.
+Sito web moderno per A Service SRLS, azienda di pulizie e manutenzioni a Milano
 
 ## Stack tecnologico
 
