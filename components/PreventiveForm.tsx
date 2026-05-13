@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Send, CheckCircle, AlertCircle } from "lucide-react";
+import emailjs from '@emailjs/browser';
 
 const serviziOptions = [
   "Pulizie Continuative",
@@ -53,9 +54,14 @@ export default function PreventiveForm() {
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
     setStatus("loading");
     // Simulate API call
-    await new Promise(r => setTimeout(r, 1800));
-    setStatus("success");
-    setForm({ nome: "", email: "", telefono: "", servizio: "", messaggio: "", privacy: false });
+  const result = await emailjs.send(
+    'service_33bnvgi',
+    'template_jmlprx7',
+    { nome: form.nome, email: form.email, telefono: form.telefono, servizio: form.servizio, messaggio: form.messaggio },
+    '-ReKYwjqGQ9mSN0Ux'
+  );
+  setStatus("success");
+  setForm({ nome: "", email: "", telefono: "", servizio: "", messaggio: "", privacy: false });
   };
 
   const fieldStyle = (name: keyof FormData) => ({
