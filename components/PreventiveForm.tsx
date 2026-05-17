@@ -53,15 +53,19 @@ export default function PreventiveForm() {
     const errs = validate(form);
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
     setStatus("loading");
-    // Simulate API call
-  const result = await emailjs.send(
-    'service_33bnvgi',
-    'template_jmlprx7',
-    { nome: form.nome, email: form.email, telefono: form.telefono, servizio: form.servizio, messaggio: form.messaggio },
-    '-ReKYwjqGQ9mSN0Ux'
-  );
-  setStatus("success");
-  setForm({ nome: "", email: "", telefono: "", servizio: "", messaggio: "", privacy: false });
+    try {
+      await emailjs.send(
+        'service_33bnvgi',
+        'template_jmlprx7',
+        { nome: form.nome, email: form.email, telefono: form.telefono, servizio: form.servizio, messaggio: form.messaggio },
+        '-ReKYwjqGQ9mSN0Ux'
+      );
+      setStatus("success");
+      setForm({ nome: "", email: "", telefono: "", servizio: "", messaggio: "", privacy: false });
+    } catch (err) {
+      console.error(err);
+      setStatus("error");
+    }
   };
 
   const fieldStyle = (name: keyof FormData) => ({
